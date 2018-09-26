@@ -1,0 +1,39 @@
+{% extends "main/layout.html" %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'popcorntime/css/main.css' %}">
+
+{% comment %} Something Here {% endcomment %}
+    <div class="card-columns">
+
+    {% for movie in last_added_data %}
+
+        <div class="card bg-dark mb-3">
+            {% comment %} <p>{{  }}</p> {% endcomment %}
+            {% comment %} <img class="card-img-top" src="..." alt="Card image cap"> {% endcomment %}
+            {% comment %} <iframe class="" width="227" height="180" src="{{ movie.trailer }}"></iframe> {% endcomment %}
+            <div class="card-body">
+                <h5 class="card-title">{{ movie.title }}</h5>
+                <p class="card-text">{{ movie.synopsis }}</p>
+
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item list-group-item-dark">Cras justo odio</li>
+                <li class="list-group-item list-group-item-dark">Dapibus ac facilisis in</li>
+                <li class="list-group-item list-group-item-dark">IMDB ID: {{ movie.imdb_id }}</li>
+            </ul>
+            {% comment %} <div class="card-body">
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div> {% endcomment %}
+            <div class="card-footer text-center">
+                <small class="text-muted">{{ movie.year }}</small>
+            </div>
+        </div>
+
+    {% endfor %}
+
+    </div>
+
+{% endblock content %}

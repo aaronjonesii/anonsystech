@@ -1,0 +1,22 @@
+{% extends "main/layout.html" %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/cardflip.css' %}" />
+<script src="{% static 'main/js/cardflip.js' %}"></script>
+
+<div class="flip-container" ontouchstart="this..classList.toggle('hover');">
+    <div class="flipper">
+
+        <div class="front">
+            <img src="{% static 'main/img/cardfront.png' %}" />
+        </div>
+
+        <div class="back">
+            <img src="{% static 'main/img/cardback.png' %}" />
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}
