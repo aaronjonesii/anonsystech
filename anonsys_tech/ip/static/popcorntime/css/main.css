@@ -1,5 +1,9 @@
+.card-columns {
+  column-count: auto;
+}
 .card {
-    width: 10rem!important;
+    width: 13rem!important;
+    /* margin: 0.5rem 2rem 1rem 0.5rem; */
 }
 .card-text {
     height: 9rem;

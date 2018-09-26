@@ -131,14 +131,12 @@ def dynamic_page(request, par_ip):
 
 
 def popcorntime(request):
-    from django import template
     from urllib.parse import urlencode
     from urllib.request import urlopen, Request
     from bs4 import BeautifulSoup
     import json
-    register = template.Library()
 
-    @register.filter(is_safe=True)
+
     def get_imgURL(movie):
         GOOGLE_IMAGE = 'https://www.google.com/search?site=&tbm=isch&source=hp&biw=1873&bih=990&'
         usr_agent = {
@@ -178,7 +176,7 @@ def popcorntime(request):
     path = "movies/"
     page = 1
     sort = 'sort=last%20added&'
-    order = '-1&'
+    order = '1&'
     genre = ''
     keywords = ''
     par = str(page)+"?"+sort+order
