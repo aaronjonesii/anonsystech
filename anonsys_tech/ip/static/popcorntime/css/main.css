@@ -5,11 +5,19 @@
     width: 13rem!important;
     /* margin: 0.5rem 2rem 1rem 0.5rem; */
 }
+.card-title {
+  color: white!important;
+}
 .card-text {
     height: 9rem;
     overflow: auto;
 }
-
+.text-overlay {
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  font-size: 1rem;
+}
 
 /* .card-columns {
     
