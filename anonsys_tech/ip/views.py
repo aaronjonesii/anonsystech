@@ -131,11 +131,6 @@ def dynamic_page(request, par_ip):
 
 
 def popcorntime(request):
-    from urllib.parse import urlencode
-    from urllib.request import urlopen, Request
-    from bs4 import BeautifulSoup
-    import json
-
 
     def get_imgURL(movie):
         GOOGLE_IMAGE = 'https://www.google.com/search?site=&tbm=isch&source=hp&biw=1873&bih=990&'
@@ -147,21 +142,6 @@ def popcorntime(request):
             'Accept-Language': 'en-US,en;q=0.8',
             'Connection': 'keep-alive'
         }
-
-        data = movie+", Movie"
-        search_query = {'q': data}
-        search = urlencode(search_query)
-        g = GOOGLE_IMAGE + search
-        req = Request(g, headers=usr_agent)
-        r = urlopen(req).read()
-        sew = BeautifulSoup(r, 'html.parser')
-        images = []
-
-        res = sew.findAll("div", {"class": "rg_meta"})
-        for re in res:
-            link, Type = json.loads(re.text)["ou"], json.loads(re.text)["ity"]
-            images.append(link)
-        print(images[0])
 
 
     if request.method == 'POST':
@@ -180,7 +160,9 @@ def popcorntime(request):
     genre = ''
     keywords = ''
     par = str(page)+"?"+sort+order
-    full_url = url+path+par
+    # full_url = url+path+par
+    full_url = "https://tv-v2.api-fetch.website/movies/1?sort=last%20added&1&"
+    # full_url = "https://tv-v2.api-fetch.website/movies/1?"
     last_added_data = get(full_url).json()
 
 
@@ -190,7 +172,6 @@ def popcorntime(request):
         'popcorntime/popcorntime.html',
         {
             'last_added_data': last_added_data,
-            'title': 'PopcornTime Page',
-            'year': datetime.now().year,
+            'title': 'PopcornTime API Page',
         }
     )
