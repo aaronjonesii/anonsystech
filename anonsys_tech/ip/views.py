@@ -152,14 +152,6 @@ def popcorntime(request):
             print("something went wrong...")
             return HttpResponseBadRequest
 
-    url = "https://tv-v2.api-fetch.website/"
-    path = "movies/"
-    page = 1
-    sort = 'sort=last%20added&'
-    order = '1&'
-    genre = ''
-    keywords = ''
-    par = str(page)+"?"+sort+order
     # full_url = url+path+par
     full_url = "https://tv-v2.api-fetch.website/movies/1?sort=last%20added&1&"
     # full_url = "https://tv-v2.api-fetch.website/movies/1?"
