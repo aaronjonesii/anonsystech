@@ -132,18 +132,7 @@ def dynamic_page(request, par_ip):
 
 def popcorntime(request):
 
-    def get_imgURL(movie):
-        GOOGLE_IMAGE = 'https://www.google.com/search?site=&tbm=isch&source=hp&biw=1873&bih=990&'
-        usr_agent = {
-            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
-            'Accept-Encoding': 'none',
-            'Accept-Language': 'en-US,en;q=0.8',
-            'Connection': 'keep-alive'
-        }
-
-
+    # Search box functionality
     if request.method == 'POST':
         search_ip = request.POST.get('search_ip', None)
         try:
@@ -152,11 +141,8 @@ def popcorntime(request):
             print("something went wrong...")
             return HttpResponseBadRequest
 
-    # full_url = url+path+par
-    full_url = "https://tv-v2.api-fetch.website/movies/1?sort=last%20added&1&"
-    # full_url = "https://tv-v2.api-fetch.website/movies/1?"
-    last_added_data = get(full_url).json()
-
+    lastaddedmovies_url = "https://tv-v2.api-fetch.website/movies/1?sort=last%20added&1&"
+    last_added_data = get(lastaddedmovies_url).json()
 
     assert isinstance(request, HttpRequest)
     return render(
