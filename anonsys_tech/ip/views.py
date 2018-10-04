@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpRequest
 from datetime import datetime # For each pages methods
 from requests import get # For ipinfo method
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
+import json
 
 # Create your views here.
 # def index(request):
@@ -141,15 +142,20 @@ def popcorntime(request):
             print("something went wrong...")
             return HttpResponseBadRequest
 
-    lastaddedmovies_url = "https://tv-v2.api-fetch.website/movies/1?sort=last%20added&1&"
-    last_added_data = get(lastaddedmovies_url).json()
+    # lastaddedmovies_url = "https://tv-v2.api-fetch.website/movies/1?sort=last%20added&1&"
+    # last_added_data = get(lastaddedmovies_url).json()
+
+    with open('files/movies_trending.json', 'r') as f:
+        f = f.read()
+        lastadded_movies = json.loads(f)
+
 
     assert isinstance(request, HttpRequest)
     return render(
         request,
         'popcorntime/popcorntime.html',
         {
-            'last_added_data': last_added_data,
+            'lastadded_movies': lastadded_movies,
             'title': 'PopcornTime API Page',
         }
     )
