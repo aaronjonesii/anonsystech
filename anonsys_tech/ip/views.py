@@ -24,6 +24,7 @@ def index(request):
         {
             'title': 'Home Page',
             'year': datetime.now().year,
+            'search_type': 'popcorntime',
         }
     )
 
@@ -72,6 +73,7 @@ def ip(request):
             'info_location': info_location,
             'title': 'IP Lookup Page',
             'year': datetime.now().year,
+            'search_type': 'popcorntime',
         }
     )
 
@@ -92,12 +94,13 @@ def contact(request):
         {
             'title':'Contact Page',
             'year':datetime.now().year,
+            'search_type': 'popcorntime',
         }
     )
 
 def dynamic_page(request, par_ip):
 
-    def ipiinfo(par_ip):
+    def ipinfo(par_ip):
         url = "https://ipinfo.io/"
         resp = get(url+par_ip)
         global sec_infodata
@@ -108,7 +111,7 @@ def dynamic_page(request, par_ip):
         except KeyError:
             loc = '37.235000,-115.811111'
 
-    ipiinfo(par_ip)
+    ipinfo(par_ip)
     if request.method == 'POST':
         search_ip = request.POST.get('search_ip', None)
         try:
@@ -127,6 +130,7 @@ def dynamic_page(request, par_ip):
             'sec_infodata': sec_infodata,
             'title':'Dynamic IP Lookup Page',
             'year':datetime.now().year,
+            'search_type': 'search_ip',
         }
     )
 
@@ -135,9 +139,9 @@ def popcorntime(request):
 
     # Search box functionality
     if request.method == 'POST':
-        search_ip = request.POST.get('search_ip', None)
+        query = request.POST.get('popcorntime', None)
         try:
-            return HttpResponseRedirect("/ip/%s" % search_ip)
+            return HttpResponseRedirect("/ip/%s" % query)
         except:
             print("something went wrong...")
             return HttpResponseBadRequest
@@ -149,7 +153,6 @@ def popcorntime(request):
         f = f.read()
         lastadded_movies = json.loads(f)
 
-
     assert isinstance(request, HttpRequest)
     return render(
         request,
@@ -157,5 +160,7 @@ def popcorntime(request):
         {
             'lastadded_movies': lastadded_movies,
             'title': 'PopcornTime API Page',
+            'search_type': 'popcorntime',
         }
     )
+
