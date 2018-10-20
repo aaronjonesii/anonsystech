@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'popcorntime_db',
         'ENGINE': 'mysql.connector.django',
         'USER': 'root',
-        'PASSWORD': '$ecurity0ff!cer',
+        'PASSWORD': '',
         'OPTIONS': {
             'autocommit': False,
         },
