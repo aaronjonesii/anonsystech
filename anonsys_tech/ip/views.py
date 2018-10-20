@@ -148,7 +148,10 @@ def popcorntime(request):
             print("something went wrong...")
             return HttpResponseBadRequest
 
-    movies = Movies.objects.order_by('-released')[:500]
+    movie_list = Movies.objects.order_by('-released')[:500]
+    paginator = Paginator(movie_list, 50)
+    page = request.GET.get('page')
+    movies = paginator.get_page(page)
     assert isinstance(request, HttpRequest)
     return render(
         request,
