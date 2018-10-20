@@ -79,8 +79,13 @@ WSGI_APPLICATION = 'anonsys_tech.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'popcorntime_db',
+        'ENGINE': 'mysql.connector.django',
+        'USER': 'root',
+        'PASSWORD': '$ecurity0ff!cer',
+        'OPTIONS': {
+            'autocommit': False,
+        },
     }
 }
 
