@@ -22,5 +22,7 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('ip/', include('ip.urls'), name='ip'),
     path('pt/', views.popcorntime, name='popcorntime'),
+    path('pt/updatedb', views.updatedb, name='updatedb'),
+    path('search/', views.search, name='search'),
     path('', views.index, name='index'),
 ]

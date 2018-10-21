@@ -15,11 +15,24 @@
     height: 9rem;
     overflow: auto;
 }
-.text-overlay {
+.top-overlay {
   position: absolute;
   top: 2px;
   left: 5px;
   font-size: 1rem;
+}
+.bottom-overlay {
+    margin-top: -1rem;
+    z-index: 100;
+}
+.md-1rem{font-size: 1rem;}
+.mag-btn {
+    /*height: 1.5rem!important;*/
+    width: 1rem!important;
+}
+.mag-btn:hover{
+    background: rgba(41, 124, 90, 0.349);
+    color: white!important;
 }
 a > .card-img-top {
   width: 206px;

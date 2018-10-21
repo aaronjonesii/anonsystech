@@ -34,3 +34,11 @@ def img_url(movie):
         return json.loads(movie.images)['poster']
     else:
         return '/static/popcorntime/img/img_not_available.svg'
+
+@register.simple_tag
+def mag_link(movie):
+    import json
+    if '1080p' in json.loads(movie.torrents)['en']:
+        return json.loads(movie.torrents)['en']['1080p']['url']
+    elif '720p' in json.loads(movie.torrents)['en']:
+        return json.loads(movie.torrents)['en']['720p']['url']

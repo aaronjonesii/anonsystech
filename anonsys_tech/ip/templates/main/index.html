@@ -1,5 +1,13 @@
 {% extends "main/layout.html" %}
 
+{% block searchform %}
+<form class="form-inline" method="POST">
+    {% csrf_token %}
+    <input class="form-control mr-sm-2" type="search" placeholder="Enter IP Address" name="search_ip" aria-label="Search">
+    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+</form>
+{% endblock searchform %}
+
 {% block content %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/cardflip.css' %}" />

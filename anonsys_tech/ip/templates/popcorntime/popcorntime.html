@@ -1,15 +1,33 @@
 {% extends "main/layout.html" %}
 
+{% block searchform %}
+<form class="form-inline" method="GET" action="{% url 'search' %}">
+    <input class="form-control mr-sm-2" type="search" value="{{request.GET.popcorntime}}" placeholder="Enter To Search" name="popcorntime" aria-label="Search">
+    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+</form>
+{% endblock searchform %}
+
+
 {% block content %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'popcorntime/css/main.css' %}">
 <script src="{% static 'popcorntime/js/main.js' %}"></script>
 {% load popcorntime_extras %}
-    <form method="get">
-        <button type="button" class="float-right btn btn-secondary" nsme="update-btn">Update Database</button>
+    <!--Update Database Button-->
+    <form method="GET" action="{% url 'updatedb' %}">
+        <button type="submit" class="float-right btn btn-secondary">Update Database</button>
     </form>
+
+    {% if messages %}
+        <ul class="float-left messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+        </ul>
+    {% endif %}
+
     <div class="w-50 mx-auto">
-        <h1 class="display-4 text-info text-center">Trending Movies</h1>
+        <h1 class="display-4 text-info text-center">{{page_heading}}</h1>
         <hr />
     </div>
 
@@ -27,8 +45,11 @@
             <a class="" target="_blank" href="https://www.imdb.com/title/{{ movie.imdb_id }}/" title="{{ movie.title }}">
                 <img class="card-img-top rounded" src="{% static '/popcorntime/img/img_not_available.svg' %}" alt="{{ movie.title }}">
             </a>
-            <div class="text-dark text-overlay font-weight-bold">{{ movie.title }}</div>
+            <div class="text-dark top-overlay font-weight-bold">{{ movie.title }}</div>
             {% endif %}
+
+            <!--Magnet Download Button-->
+            <a href="{% mag_link movie %}" class="d-flex float-left bottom-overlay mag-btn" role="button"> <i class="material-icons md-1rem">get_app</i> </a>
 
 
             {% comment %}
@@ -53,10 +74,10 @@
 
 
     <div class="pagination">
-        <span class="step-links">
+        <span class="mx-auto step-links">
             {% if movies.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ movies.previous_page_number }}">previous</a>
+                <a href="?page=1{% if query %} &popcorntime={{query}} {% endif %}"><i class="material-icons md-1rem">first_page</i></a>
+                <a href="?page={{ movies.previous_page_number }}{% if query %} &popcorntime={{query}} {% endif %}"><i class="material-icons md-1rem">navigate_before</i></a>
             {% endif %}
 
             <span class="current">
@@ -64,8 +85,8 @@
             </span>
 
             {% if movies.has_next %}
-                <a href="?page={{ movies.next_page_number }}">next</a>
-                <a href="?page={{ movies.paginator.num_pages }}">last &raquo;</a>
+                <a href="?page={{ movies.next_page_number }}{% if query %} &popcorntime={{query}} {% endif %}"><i class="material-icons md-1rem">navigate_next</i></a>
+                <a href="?page={{ movies.paginator.num_pages }}{% if query %} &popcorntime={{query}} {% endif %}"><i class="material-icons md-1rem">last_page</i></a>
             {% endif %}
         </span>
     </div>
