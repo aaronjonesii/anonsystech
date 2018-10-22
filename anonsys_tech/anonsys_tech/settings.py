@@ -20,12 +20,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'yjg1by0iy*1-@zwq4^-vg^k84a%685(tj%oceu@9asdecx$2u6'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'anonsys.tech',
     # 'testserver',
     # '',
 ]
@@ -76,19 +77,17 @@ WSGI_APPLICATION = 'anonsys_tech.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'NAME': 'popcorntime_db',
         'ENGINE': 'mysql.connector.django',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': os.environ['DJANGO_DATABASE_PWD'],
         'OPTIONS': {
             'autocommit': False,
         },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

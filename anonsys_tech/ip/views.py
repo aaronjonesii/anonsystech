@@ -155,10 +155,11 @@ def popcorntime(request):
             print("something went wrong...")
             return HttpResponseBadRequest
 
+    # movie_list = Movies.objects.all()[:500]
     # Last Added Movies
-    # movie_list = Movies.objects.order_by('-released')[:500]
+    movie_list = Movies.objects.order_by('-released')[:500]
     # Most Popular Movies
-    movie_list = Movies.objects.raw("select * from ip_movies order by json_extract(rating, '$.votes') desc;")[:500]
+    # movie_list = Movies.objects.raw("select * from ip_movies order by json_extract(rating, '$.votes') desc;")[:500]
     # Message
     # messages.info(request, f'{len(movie_list)} SQL results were returned')
     paginator = Paginator(movie_list, 54)
@@ -171,7 +172,7 @@ def popcorntime(request):
         {
             'movies': movies,
             'title': 'PopcornTime API Page',
-            'page_heading': 'Most Popular Movies',
+            'page_heading': 'Last Added Movies',
         }
     )
 

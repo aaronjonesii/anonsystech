@@ -27,13 +27,18 @@ def add_movie2tbl(db, movie):
 # Create Databse and Table if it does not exist
 def create_db():
     db = mysql.connector.connect(
-        host="localhost",
-        user="username",
-        passwd="somepassword", # You need to enter the credentials for the MySQL server
-        # database= database_name, # If no db exists, you will get an error
+        host='localhost',
+        user='root',
+        passwd='$ecurity0ff!cer',
     )
     cursor = db.cursor()
-    cursor.execute("CREATE DATABASE popcorntime_db")
+    try: 
+        cursor.execute("CREATE DATABASE popcorntime_db")
+        print('Successfully created popcorntime_db Database!')
+    except Exception as e: 
+        print(f'Something went wrong creating the database popcorntime_db: {e}')
+        traceback.print_exc()
+    cursor.execute('use popcorntime_db;')
     sql = '''CREATE TABLE ip_movies (
                             _id VARCHAR(20),
                             imdb_id VARCHAR(10),
@@ -51,12 +56,19 @@ def create_db():
                             genres VARCHAR(255),
                             images TEXT,
                             rating VARCHAR(255),
-                            __v TINYINT,
+                            _v TINYINT,
                             PRIMARY KEY(_id)
                             )'''
-    cursor.execute(sql)
-    print("Successfully created popcorntime_db Databse and ip_movies table for webapp")
-    cursor.execute("SHOW COLUMNS FROM ip_movies.popcorntime_db;")
+    try: 
+        cursor.execute(sql)
+        print('Successfully created ip_movies table in popcorntime_db Database!')
+    except Exception as e: 
+        print(f'Something went wrong trying to add the ip_movies table: {e}')
+        traceback.print_exc()
+    cursor.execute("SHOW COLUMNS FROM ip_movies;")
     results = cursor.fetchall()
     for col in results:
         print(col)
+
+if __name__ == '__main__':
+    create_db()
