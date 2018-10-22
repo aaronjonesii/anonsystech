@@ -234,7 +234,7 @@ def updatedb(request):
     db_connector = mysql.connector.connect(
         host="localhost",
         user="root",
-        passwd="$ecurity0ff!cer",
+        passwd=os.environ['DJANGO_DATABASE_PWD'],
         database='popcorntime_db',  # For existing databases
     )
     db = db_connector
