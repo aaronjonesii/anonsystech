@@ -3,27 +3,6 @@ import traceback
 import json
 
 
-def add_movie2tbl(db, movie):
-    try:
-        cursor = db.cursor()
-        table_name = 'ip_movies'
-        for key, val in zip(movie.keys(), movie.values()):
-            if key == '__v':
-                movie['_v'] = movie.pop(f'{key}')
-            elif type(val) is dict: movie[key] =  json.dumps(movie[key])
-            else: pass
-        value_placeholders = ', '.join(['%s'] * len(movie))
-        cols = ', '.join(movie.keys())
-        sql = f" INSERT IGNORE INTO {table_name} ( {cols} ) VALUES ( {value_placeholders} ); "
-        # sql = f" INSERT INTO {table_name} ( {cols} ) VALUES ( {value_placeholders} ) WHERE NOT EXISTS (SELECT _id FROM {table_name} WHERE _id = '{movie['_id']}'); "
-        values = tuple(str(val) for val in movie.values())
-        cursor.execute(sql, values)
-        db.commit()
-    except Exception as e:
-        print(f"[!] Something went wrong while attempting the insert: {e}")
-        traceback.print_exc()
-
-
 # Create Databse and Table if it does not exist
 def create_db():
     db = mysql.connector.connect(
@@ -32,14 +11,15 @@ def create_db():
         passwd='$ecurity0ff!cer',
     )
     cursor = db.cursor()
-    try: 
-        cursor.execute("CREATE DATABASE popcorntime_db")
-        print('Successfully created popcorntime_db Database!')
-    except Exception as e: 
-        print(f'Something went wrong creating the database popcorntime_db: {e}')
+    try:
+        cursor.execute("CREATE DATABASE anonsys_db")
+        print('Successfully created anonsys_db Database!')
+    except Exception as e:
+        print(
+            f'Something went wrong creating the database anonsys_db: {e}')
         traceback.print_exc()
-    cursor.execute('use popcorntime_db;')
-    sql = '''CREATE TABLE ip_movies (
+    cursor.execute('use anonsys_db;')
+    sql = '''CREATE TABLE popcorntime_movie (
                             _id VARCHAR(20),
                             imdb_id VARCHAR(10),
                             title VARCHAR(255),
@@ -59,16 +39,17 @@ def create_db():
                             _v TINYINT,
                             PRIMARY KEY(_id)
                             )'''
-    try: 
+    try:
         cursor.execute(sql)
-        print('Successfully created ip_movies table in popcorntime_db Database!')
-    except Exception as e: 
-        print(f'Something went wrong trying to add the ip_movies table: {e}')
+        print('Successfully created popcorntime_movie table in anonsys_db Database!')
+    except Exception as e:
+        print(f'Something went wrong trying to add the popcorntime_movie table: {e}')
         traceback.print_exc()
-    cursor.execute("SHOW COLUMNS FROM ip_movies;")
+    cursor.execute("SHOW COLUMNS FROM popcorntime_movie;")
     results = cursor.fetchall()
     for col in results:
         print(col)
+
 
 if __name__ == '__main__':
     create_db()

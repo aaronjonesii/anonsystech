@@ -15,14 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from ip import views
+from anonsys_tech.home import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls, name='admin'),
-    path('contact/', views.contact, name='contact'),
-    path('ip/', include('ip.urls'), name='ip'),
-    path('pt/', views.popcorntime, name='popcorntime'),
-    path('pt/updatedb', views.updatedb, name='updatedb'),
-    path('search/', views.search, name='search'),
-    path('', views.index, name='index'),
+    path('admin/', admin.site.urls),
+    path('', include('anonsys_tech.home.urls'), name='home'),
+    path('contact/', views.contact, name="contact"),
+    path('ip/', include('anonsys_tech.ip.urls'), name='ip'),
+    path('popcorntime/', include('anonsys_tech.popcorntime.urls'), name='popcorntime'),
+    path('pt/', include('anonsys_tech.popcorntime.urls'), name='popcorntime'),
+    path('thx/', views.thx, name="thx"),
 ]

@@ -20,16 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'anonsys.tech',
-    # 'testserver',
-    # '',
-]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -41,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ip',
+    'anonsys_tech.home',
+    'anonsys_tech.ip',
+    'anonsys_tech.popcorntime',
 ]
 
 MIDDLEWARE = [
@@ -77,17 +75,20 @@ WSGI_APPLICATION = 'anonsys_tech.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+
 DATABASES = {
     'default': {
-        'NAME': 'popcorntime_db',
+        'NAME': 'anonsys_db',
         'ENGINE': 'mysql.connector.django',
         'USER': 'root',
-        'PASSWORD': os.environ['DJANGO_DATABASE_PWD'],
+        'PASSWORD': '',
+        # 'PASSWORD': os.environ['DJANGO_DATABASE_PWD'],
         'OPTIONS': {
             'autocommit': False,
         },
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -126,3 +127,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# EMAIL
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = ""
+EMAIL_PORT = 587
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
