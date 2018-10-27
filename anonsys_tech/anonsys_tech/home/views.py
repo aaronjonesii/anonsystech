@@ -26,17 +26,23 @@ def contact(request):
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
-            if form.is_valid():
                 subject = form.cleaned_data['subject']
-                message = form.cleaned_data['message']
-                sender = form.cleaned_data['sender']
+                body = form.cleaned_data['message']
+                contacter = form.cleaned_data['sender']
                 cc_myself = form.cleaned_data['cc_myself']
 
-                recipients = ['support@anonsys.tech']
-                if cc_myself:
-                    recipients.append(sender)
+                to_list = ['support@anonsys.tech']
+                bcc_list = []
+                # if cc_myself:
+                #     bcc_list.append(contacter)
 
-                send_mail(subject, message, sender, recipients)
+                text_content = f"From: {contacter}\n{body}"
+                html_content = f"<h1>You recieved a new message from the contact form:</h1><br /><strong>From: {contacter}</strong><br /><p>{body}</p>"
+                msg = EmailMultiAlternatives(subject, text_content, contacter, to_list)
+                msg.attach_alternative(html_content, "text/html")
+                msg.send()
+
+                # send_mail(subject, message, sender, recipients)
                 return HttpResponseRedirect('/thx/')
 
     # if a GET (or any other method) we'll create a blank form

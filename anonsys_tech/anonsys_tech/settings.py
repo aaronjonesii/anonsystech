@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.environ['ALLOWED_HOSTS']]
 
 
 # Application definition
@@ -81,8 +81,8 @@ DATABASES = {
         'NAME': 'anonsys_db',
         'ENGINE': 'mysql.connector.django',
         'USER': 'root',
-        'PASSWORD': '',
-        # 'PASSWORD': os.environ['DJANGO_DATABASE_PWD'],
+        # 'PASSWORD': '',
+        'PASSWORD': os.environ['DJANGO_DATABASE_PWD'],
         'OPTIONS': {
             'autocommit': False,
         },
@@ -132,9 +132,9 @@ STATIC_URL = '/static/'
 # EMAIL
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = ""
+EMAIL_HOST = os.environ['EMAIL_HOST']
 EMAIL_PORT = 587
-EMAIL_HOST_USER = ""
-EMAIL_HOST_PASSWORD = ""
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False

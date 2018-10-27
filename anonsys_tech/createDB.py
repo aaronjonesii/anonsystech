@@ -1,6 +1,7 @@
 import mysql.connector
 import traceback
 import json
+import os
 
 
 # Create Databse and Table if it does not exist
@@ -8,7 +9,7 @@ def create_db():
     db = mysql.connector.connect(
         host='localhost',
         user='root',
-        passwd='',
+        passwd=os.environ['DJANGO_DATABASE_PWD'],
     )
     cursor = db.cursor()
     try:
