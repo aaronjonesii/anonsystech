@@ -8,7 +8,7 @@ def create_db():
     db = mysql.connector.connect(
         host='localhost',
         user='root',
-        passwd='$ecurity0ff!cer',
+        passwd='',
     )
     cursor = db.cursor()
     try:
