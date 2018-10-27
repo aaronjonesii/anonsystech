@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f7ebf5f-8296-43a2-b30f-f93b1eeb8347" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/anonsys_tech/anonsys_tech/home/templates/thx.html" beforeDir="false" afterPath="$PROJECT_DIR$/anonsys_tech/anonsys_tech/home/templates/thx.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/anonsys_tech/anonsys_tech/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/anonsys_tech/anonsys_tech/home/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/anonsys_tech/anonsys_tech/popcorntime/templates/updatedb.html" beforeDir="false" afterPath="$PROJECT_DIR$/anonsys_tech/anonsys_tech/popcorntime/templates/updatedb.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/anonsys_tech/anonsys_tech/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/anonsys_tech/anonsys_tech/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/anonsys_tech/createDB.py" beforeDir="false" afterPath="$PROJECT_DIR$/anonsys_tech/createDB.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/anonsys_tech/anonsys_tech/home/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/anonsys_tech/anonsys_tech/home/forms.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,13 +21,13 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="html" value="4" />
-          <entry key="py" value="5" />
+          <entry key="py" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="HTML" value="4" />
-          <entry key="Python" value="5" />
+          <entry key="Python" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -50,14 +46,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/anonsys_tech/anonsys_tech/home/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="35" selection-start-line="35" selection-end-line="36" selection-end-column="48" />
+            <state relative-caret-position="615">
+              <caret line="41" column="22" lean-forward="true" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
               <folding>
                 <element signature="e#0#57#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/anonsys_tech/anonsys_tech/home/forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" selection-start-line="8" selection-end-line="9" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -75,6 +80,7 @@
         <option value="$PROJECT_DIR$/anonsys_tech/anonsys_tech/popcorntime/templates/updatedb.html" />
         <option value="$PROJECT_DIR$/anonsys_tech/anonsys_tech/home/templates/thx.html" />
         <option value="$PROJECT_DIR$/anonsys_tech/anonsys_tech/home/views.py" />
+        <option value="$PROJECT_DIR$/anonsys_tech/anonsys_tech/home/forms.py" />
       </list>
     </option>
   </component>
@@ -170,7 +176,7 @@
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.3299363" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -232,11 +238,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/anonsys_tech/anonsys_tech/home/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="35" selection-start-line="35" selection-end-line="36" selection-end-column="48" />
+        <state relative-caret-position="615">
+          <caret line="41" column="22" lean-forward="true" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
           <folding>
             <element signature="e#0#57#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/anonsys_tech/anonsys_tech/home/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" selection-start-line="8" selection-end-line="9" selection-end-column="43" />
         </state>
       </provider>
     </entry>
