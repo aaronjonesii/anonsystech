@@ -1,7 +1,15 @@
 body {
     background: darkslategrey!important;
+    padding-bottom: 40px;
 }
-
+footer {
+    z-index: 1!important;
+    position: absolute;
+    background: darkslategrey!important;
+}
+.body-content {
+    height: 80%!important;
+}
 .copyright {
     margin: 1rem 1rem 0 0;
     font-size: 0.8rem!important;

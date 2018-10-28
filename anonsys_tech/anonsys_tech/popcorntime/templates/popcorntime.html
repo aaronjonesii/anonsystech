@@ -19,12 +19,14 @@
     <button type="submit" class="float-right btn btn-secondary">Update Database</button>
 </form>
 
+<div class="alert alert-danger float-left d-block"><i class="material-icons">warning</i><span class="warning_msg">{{ warning_msg|upper }}</span></div>
+
 <div class="w-50 mx-auto">
     <h1 class="display-4 text-info text-center">{{page_heading}}</h1>
     <hr />
 </div>
 
-<div class="container-fluid content-row mx-auto mb-5">
+<div class="container-fluid content-row mx-auto">
     <div class="row">
 
         {% for movie in movies %}
@@ -42,8 +44,9 @@
             {% endif %}
 
             <!--Magnet Download Button-->
-            <a href="{% mag_link movie %}" class="d-flex float-left bottom-overlay mag-btn" role="button"> <i class="material-icons md-1rem">get_app</i>
-            </a>
+{#            <a href="{% mag_link movie %}" class="d-flex float-left bottom-overlay mag-btn" role="button"> <i class="material-icons md-1rem">get_app</i></a>#}
+            <a href="{% mag_link movie %}" id="" class="bottom-right-overlay badge badge-primary">Download</a>
+            <a href="{% mag_link movie %}" id="" class="bottom-right-overlay down_icon_link badge badge-primary"><i id="down_icon" class="down_icon material-icons">get_app</i></a>
 
         </div>
         {% endfor %}

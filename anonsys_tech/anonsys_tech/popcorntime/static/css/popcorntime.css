@@ -47,3 +47,26 @@ a > .card-img-top {
     column-count: 5;
   }
 } */
+
+.warning_msg {}
+.material-icons {
+    position: relative;
+    top: 3px!important;
+    margin: 0 .5rem .5rem 0;
+}
+.bottom-right-overlay {
+    position: absolute;
+    bottom: .2rem;
+    right: .5rem;
+}
+.down_link {
+}
+.down_icon {
+    font-size: .9rem!important;
+    margin-top: -2rem!important;
+    margin-right: 0!important;
+}
+.down_icon_link {
+    height: 1rem!important;
+    display: none!important;
+}
