@@ -1,13 +1,22 @@
-// $(document).ready(function () {
-//     setTimeout(function(){
-//         document.getElementById('down_link').style.display = "none!important";
-//         document.getElementById('down_icon_link').style.display = "inline-block!important";
-//     }, 5000);
-// });
+var down_text = document.getElementsByClassName('down-link');
+var down_icon = document.getElementsByClassName('down-icon-link');
 
+function hideText(down_text) {
+    for (var i=0; i<down_text.length; i++) {
+        $(down_text[i]).fadeOut(1000);
+    }
+}
 
+function showIcon(down_icon) {
+    for (var i=0; i<down_icon.length; i++) {
+        $(down_icon[i]).fadeIn(1500);
+    }
+}
 
-setTimeout(function(){
-    document.getElementById('down_link').style.display = "none!important";
-    document.getElementById('down_icon_link').style.display = "inline-block!important";
-    }, 3000);
+$(document).ready(function() {
+    setTimeout(function() {
+        $(hideText(down_text))
+        $(showIcon(down_icon))
+    }, 3000)
+})
+

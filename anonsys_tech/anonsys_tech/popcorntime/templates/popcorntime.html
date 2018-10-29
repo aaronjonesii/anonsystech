@@ -12,7 +12,6 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/popcorntime.css' %}">
-<script src="{% static 'js/popcorntime.js' %}"></script>
 {% load popcorntime_extras %}
 <!--Update Database Button-->
 <form method="GET" action="{% url 'updatedb' %}">
@@ -45,11 +44,12 @@
 
             <!--Magnet Download Button-->
 {#            <a href="{% mag_link movie %}" class="d-flex float-left bottom-overlay mag-btn" role="button"> <i class="material-icons md-1rem">get_app</i></a>#}
-            <a href="{% mag_link movie %}" id="" class="bottom-right-overlay badge badge-primary">Download</a>
-            <a href="{% mag_link movie %}" id="" class="bottom-right-overlay down_icon_link badge badge-primary"><i id="down_icon" class="down_icon material-icons">get_app</i></a>
+            <a href="{% mag_link movie %}" id="" class="down-link bottom-right-overlay badge badge-primary">Download</a>
+            <a href="{% mag_link movie %}" id="" class="down-icon-link bottom-right-overlay badge badge-primary"><i id="down-icon" class="down-icon material-icons">get_app</i></a>
 
         </div>
         {% endfor %}
+        <script src="{% static 'js/popcorntime.js' %}"></script>
 
     </div>
 </div>
