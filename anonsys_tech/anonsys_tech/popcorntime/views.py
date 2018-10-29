@@ -67,6 +67,7 @@ def search(request):  # Search box functionality
 
 
 def updatedb(request):
+    time = datetime.datetime.now().strftime("%c")
     ip = get_client_ip(request)
     print("\n---------------Preparing to Update the Movie Database--------------")
     db_connector = mysql.connector.connect(
@@ -96,7 +97,6 @@ def updatedb(request):
         pass
     db.close()
         
-    time = datetime.datetime.now().strftime("%c")
     subject = "Movie Database Update"
     from_email = "database@anonsys.tech"
     to_list = ["admin@anonsys.tech"]
