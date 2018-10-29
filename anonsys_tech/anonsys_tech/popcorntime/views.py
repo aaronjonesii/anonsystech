@@ -67,6 +67,7 @@ def search(request):  # Search box functionality
 
 
 def updatedb(request):
+    ip = get_client_ip(request)
     print("\n---------------Preparing to Update the Movie Database--------------")
     db_connector = mysql.connector.connect(
         host="localhost",
@@ -94,8 +95,7 @@ def updatedb(request):
         body = f"Movie Database Update Attempted By: {ip}\n {time}\nSomething went wrong: {data.status_code}\n{data}"
         pass
     db.close()
-
-    ip = get_client_ip(request)
+        
     time = datetime.datetime.now().strftime("%c")
     subject = "Movie Database Update"
     from_email = "database@anonsys.tech"
