@@ -11,7 +11,15 @@ from .decorators import check_recaptcha
 
 
 def index(request):
+    if request.method == 'POST':
+    search_ip = request.POST.get('search_ip', None)
+    try:
+        return HttpResponseRedirect("/ip/%s" % search_ip)
+    except:
+        print("something went wrong...")
+        return HttpResponseBadRequest
 
+    
     assert isinstance(request, HttpRequest)
     context = {
         'title' : 'Home Page',
@@ -67,6 +75,14 @@ def contact(request):
 
 
 def thx(request):
+    if request.method == 'POST':
+    search_ip = request.POST.get('search_ip', None)
+    try:
+        return HttpResponseRedirect("/ip/%s" % search_ip)
+    except:
+        print("something went wrong...")
+        return HttpResponseBadRequest
+    
     assert isinstance(request, HttpRequest)
     context = {
         'title': 'Thanks for your feedback!',
