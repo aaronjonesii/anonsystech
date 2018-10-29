@@ -88,13 +88,16 @@ def updatedb(request):
         print("\tUpdating Database if movie does not exist..")
         for movie in movie_list:
             add_movie2tbl(db, movie)
+        body = f"Movie Database Successfully Updated By: {ip}\n {time}"
         print("[!] Movie Database has been updated, now sending email notification... [!]")
+    else: 
+        body = f"Movie Database Update Attempted By: {ip}\n {time}\nSomething went wrong: {data.status_code}\n{data}"
+        pass
     db.close()
 
     ip = get_client_ip(request)
     time = datetime.datetime.now().strftime("%c")
-    subject = "Movie Database Updated"
-    body = f"Movie Database Updated By: {ip}\n {time}"
+    subject = "Movie Database Update"
     from_email = "database@anonsys.tech"
     to_list = ["admin@anonsys.tech"]
     bcc = ["support@anonsys.tech"]
