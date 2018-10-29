@@ -93,7 +93,7 @@ def updatedb(request):
         body = f"Movie Database Successfully Updated By: {ip}\n {time}"
         print("[!] Movie Database has been updated, now sending email notification... [!]")
     else: 
-        body = f"Movie Database Update Attempted By: {ip}\n {time}\nSomething went wrong: {data.status_code}\n{data}"
+        body = f"Movie Database Update Attempted By: {ip}\n {time}\nSomething went wrong: {data.status_code}\n{data.content}"
         pass
     db.close()
         
