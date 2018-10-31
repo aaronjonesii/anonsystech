@@ -56,12 +56,16 @@ def search(request):  # Search box functionality
     paginator = Paginator(results, 27)
     page = request.GET.get('page')
     movies = paginator.get_page(page)
+
+    warning_msg = "Remember to use a secure connection!"
+
     assert isinstance(request, HttpRequest)
     context = {
         'movies': movies,
         'title': f'Search Results for: ',
         'page_heading': f'{len(results)} Search Results Found:',
         'query': query,
+        'warning_msg': warning_msg,
     }
     return render(request, 'popcorntime.html', context)
 
