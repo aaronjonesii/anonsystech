@@ -1,0 +1,5 @@
+# Ignore folder named '__pycahe__'
+__pycache__/
+# Ignore all .DS_STORE & .idea files
+*.DS_STORE
+*.idea

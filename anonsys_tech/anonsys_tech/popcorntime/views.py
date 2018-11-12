@@ -26,7 +26,7 @@ def popcorntime(request):
             print("something went wrong...")
             return HttpResponseBadRequest
 
-    # Last Added Movies
+    # Recently Released Movies
     movie_list = Movie.objects.order_by('-released')[:500]
     # Most Popular Movies - MYSQL 8.0
     # movie_list = Movie.objects.raw("select * from ip_movies order by json_extract(rating, '$.votes') desc;")[:500]
@@ -40,7 +40,7 @@ def popcorntime(request):
     context = {
         'movies': movies,
         'title': 'PopcornTime API Page',
-        'page_heading': 'Last Added Movies',
+        'page_heading': 'Recently Released Movies',
         'warning_msg': warning_msg,
     }
     return render(request, 'popcorntime.html', context)
