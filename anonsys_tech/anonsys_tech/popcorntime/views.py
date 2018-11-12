@@ -1,10 +1,13 @@
 from django.http import HttpRequest, HttpResponseRedirect, HttpResponseBadRequest
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from anonsys_tech.popcorntime.models import Movie
+from django.db.models.expressions import RawSQL
 from django.core.mail import EmailMessage
 from django.shortcuts import render
 from django.contrib import messages
+from .apps import add_newentry
 from django.db.models import Q
+from pathlib import Path
 from requests import get
 import mysql.connector
 import traceback
@@ -28,6 +31,7 @@ def popcorntime(request):
 
     # Recently Released Movies
     movie_list = Movie.objects.order_by('-released')[:500]
+    # movie_list = Movie.objects.order_by(RawSQL('rating->>%s', ('votes',)))
     # Most Popular Movies - MYSQL 8.0
     # movie_list = Movie.objects.raw("select * from ip_movies order by json_extract(rating, '$.votes') desc;")[:500]
     paginator = Paginator(movie_list, 54)
@@ -94,14 +98,51 @@ def updatedb(request):
         print("\tUpdating Database if movie does not exist..")
         for movie in movie_list:
             add_movie2tbl(db, movie)
-        body = f"Movie Database Successfully Updated By: {ip}\n {time}"
+
+        # Get #/movies
+        cursor = db.cursor()
+        cursor.execute('SELECT COUNT(*) FROM anonsys_db.popcorntime_movie;')
+        x = cursor.fetchall()
+        for (i,) in x:
+            dbmoviecount = i
+
+        # Compare #/movies
+        file = Path('anonsys_tech/anonsys_tech/popcorntime/moviecount')
+        with open(file, 'r+') as open_file:
+            read_file = open_file.readlines()
+            line_number = 1
+            for line in read_file:
+                try:
+                    linedatestamp, linemoviecount = line.split(',')
+                except ValueError:
+                    print(f'Improper data in file: {str(file)}\n Erasing and Adding proper data to file..')
+                    open_file.truncate(0)
+                    add_newentry(file, dbmoviecount)
+                    break
+                global new_movies
+                if line_number == 1:
+                    if dbmoviecount > int(linemoviecount):
+                        add_newentry(file, dbmoviecount)
+                        new_movies = dbmoviecount - int(linemoviecount)
+                        print(f'{new_movies} new movies were added to the db..')
+                    elif dbmoviecount == int(linemoviecount):
+                        new_movies = None
+                        print('No new movies were added to the db.')
+                line_number += 1
+
+        subject = "Movie Database Update SUCCESS"
+        if new_movies == None:
+            body = f"Movie Database Successfully Updated By: {ip}\n No new movies were added to the db..\n{time}"
+        else:
+            body = f"Movie Database Successfully Updated By: {ip}\n {new_movies} new movies were added to the db..\n{time}"
         print("[!] Movie Database has been updated, now sending email notification... [!]")
-    else: 
+    else:
+        subject = "Movie Database Update FAIL"
         body = f"Movie Database Update Attempted By: {ip}\n {time}\nSomething went wrong: {data.status_code}\n{data.content}"
         pass
     db.close()
         
-    subject = "Movie Database Update"
+
     from_email = "database@anonsys.tech"
     to_list = ["admin@anonsys.tech"]
     bcc = ["support@anonsys.tech"]
@@ -111,6 +152,7 @@ def updatedb(request):
     assert isinstance(request, HttpRequest)
     context = {
         'title': 'Movie Database Maintenance',
+        'new_movies': 0 if new_movies == None else new_movies,
     }
     return render(request, 'updatedb.html', context)
 

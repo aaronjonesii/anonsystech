@@ -21,6 +21,12 @@
      <p class="lead">
         <a class="btn btn-primary btn-sm" href="{% url 'popcorntime' %}" role="button">Continue to Movies</a>
     </p>
+    {% if new_movies != 0 %}
+        <p class="text-lead">Awesome, {{ new_movies }} new movies were added to the Database..</p>
+    {% elif new_movies == 0 %}
+        <p class="text-lead">Ahh Shucks, No new movies were added to the database..</p>
+    {% endif %}
+
 </div>
 
 {% endblock content %}
