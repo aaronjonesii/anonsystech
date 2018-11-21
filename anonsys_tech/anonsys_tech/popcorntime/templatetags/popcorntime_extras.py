@@ -17,7 +17,7 @@ def img_url(movie):
     if 'http' in json.loads(movie.images)['poster']:
         return json.loads(movie.images)['poster']
     else:
-        return '/static/popcorntime/img/img_not_available.svg'
+        return '/static/popcorntime/img/img_not_available.png'
 
 
 # For Magnet downlaod link:
