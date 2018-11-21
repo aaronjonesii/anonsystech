@@ -1,6 +1,9 @@
 body{
     background: -webkit-linear-gradient(left, #007295, #152638, #007295)!important;
 }
+footer{
+    background: transparent!important;
+}
 .contact-form{
     background: #fff;
     margin-top: 1%;
