@@ -1,6 +1,6 @@
 from django.http import HttpRequest, HttpResponseRedirect
-from django.core.mail import EmailMultiAlternatives
-# from django.core.mail import EmailMessage
+# from django.core.mail import EmailMultiAlternatives
+from django.core.mail import EmailMessage
 # from django.core.mail import send_mail
 from django.shortcuts import render
 from .forms import ContactForm
@@ -38,7 +38,7 @@ def contact(request):
             # process the data in form.cleaned_data as required
             subject = "Contact Form - "+form.cleaned_data['subject']
             body = form.cleaned_data['message']
-            contacter = form.cleaned_data['sender']
+            from_email = form.cleaned_data['sender']
             # cc_myself = form.cleaned_data['cc_myself']
             to_list = ['support@anonsys.tech']
             bcc_list = []
@@ -46,19 +46,9 @@ def contact(request):
             replyto_list = []
             # if cc_myself:
             #     bcc_list.append(contacter)
-            text_content = f'''Contact Form: \n
-                                From: {contacter}
-                                Subject: {subject}
-                                Message:
-                                {body}'''
-            html_content = f"<h3>Contact Form:</h3><h5>From: {contacter}</h5><h5>Subject: </h5>{subject}<h5>Message: </h5>{body}"
-            msg = EmailMultiAlternatives(subject=subject, body=html_content, from_email=contacter, to=to_list,
-                                         bcc=bcc_list, connection=None, attachments=None, headers=None,
-                                         alternatives=None, cc=cc_list, reply_to=replyto_list)
-            msg.attach_alternative(text_content, "text/html")
 
-            # send_mail(subject, message, sender, recipients)
-            msg.send()
+            email = EmailMessage(subject=subject, body=body, from_email=from_email, to=to_list, bcc=bcc_list)
+            email.send()
             return HttpResponseRedirect('/thx/')
 
     # if a GET (or any other method) we'll create a blank form
