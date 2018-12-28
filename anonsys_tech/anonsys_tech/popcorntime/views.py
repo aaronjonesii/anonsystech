@@ -107,7 +107,7 @@ def updatedb(request):
             dbmoviecount = i
 
         # Compare #/movies
-        file = Path('anonsys_tech/anonsys_tech/popcorntime/moviecount')
+        file = Path('anonsys_tech/popcorntime/moviecount')
         with open(file, 'r+') as open_file:
             read_file = open_file.readlines()
             line_number = 1
