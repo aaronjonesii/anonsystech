@@ -128,6 +128,25 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/home/anonsys/anonsystech/anonsys_tech/debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 
 # EMAIL
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
